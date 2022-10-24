@@ -1,0 +1,54 @@
+<form class="form mat-elevation-z8">
+    <h1>Criando uma nova ordem de serviço</h1>
+    <mat-form-field class="full-width">
+      <mat-label>Tecnico</mat-label>
+      <!-- <input [(ngModel)]="os.tecnico" [formControl]="tecnico" required maxlength="100" name="tecnico" matInput placeholder="Tecnico"> -->
+      <mat-select [(ngModel)]="os.tecnico" required [formControl]="tecnico">
+        <mat-option [value]="tecnicos.nome" *ngFor="let tecnicos of listTecnico">
+            {{tecnicos.nome}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="tecnico.invalid">{{errorValidTecnico()}}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(ngModel)]="os.cliente" required [formControl]="cliente">
+            <mat-option [value]="clientes.nome" *ngFor="let clientes of listCliente">
+                {{clientes.nome}}
+            </mat-option>
+          </mat-select>
+        <mat-error *ngIf="cliente.invalid">{{errorValidCliente()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Prioridade</mat-label>
+        <!-- <input [(ngModel)]="os.prioridade" [formControl]="prioridade" maxlength="18"  required name="prioridade" matInput placeholder="prioridade"> -->
+        <mat-select [(ngModel)]="os.prioridade" required [formControl]="prioridade">
+            <mat-option [value]="i" *ngFor="let prioridade of listPrioridades; index as i">
+                {{prioridade}}
+            </mat-option>
+          </mat-select>
+        <mat-error *ngIf="prioridade.invalid">{{errorValidPrioridade()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Status</mat-label>
+        <!-- <input [(ngModel)]="os.status" [formControl]="status" maxlength="18"  required name="status" matInput placeholder="status"> -->
+        <mat-select [(ngModel)]="os.status" required [formControl]="status">
+            <mat-option [value]="i" *ngFor="let status of listStatus; index as i">
+                {{status}}
+            </mat-option>
+          </mat-select>
+        <mat-error *ngIf="status.invalid">{{errorValidStatus()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Observações</mat-label>
+        <input [(ngModel)]="os.observacoes" [formControl]="observacoes" maxlength="100"  required name="observacoes" matInput placeholder="observacoes">
+        <mat-error *ngIf="observacoes.invalid">{{errorValidObservacoes()}}</mat-error>
+    </mat-form-field>
+    <button class="mat-elevation-z8" (click)="create()" [disabled]="errorValidTecnico() || errorValidCliente() || errorValidPrioridade() || errorValidStatus() || errorValidObservacoes()" mat-stroked-button color="accent">CRIAR</button>
+    <button class="mat-elevation-z8" (click)="onCancel()"  mat-stroked-button color="warn">CANCELAR</button>
+  </form>
+

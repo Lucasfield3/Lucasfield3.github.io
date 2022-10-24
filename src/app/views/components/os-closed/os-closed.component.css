@@ -1,0 +1,61 @@
+.create{
+    width: 90%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.create h1{
+    width:fit-content;
+    margin:0 auto;
+    font-size:2rem;
+}
+.create button{
+    width:100%;
+    margin:1rem auto;
+}
+
+.container {
+    width: 90%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+table{
+    width: 100%;
+}
+
+.aberto{
+    color:green;
+}
+
+.andamento{
+    color:yellow;
+}
+
+.encerrado{
+    color:red;
+}
+
+.baixa{
+    color:green;
+}
+
+.media{
+    color:yellow;
+}
+
+.alta{
+    color:red;
+}
+
+i{
+    padding-right:1rem;
+}
+
+#edit{
+    color:#ffeb3b;
+}
+
+#delete{
+    color:#f44336;
+}
