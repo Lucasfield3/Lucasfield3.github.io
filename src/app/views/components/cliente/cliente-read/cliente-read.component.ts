@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -10,10 +10,10 @@ import { ClienteService } from 'src/app/services/cliente.service';
   templateUrl: './cliente-read.component.html',
   styleUrls: ['./cliente-read.component.css']
 })
-export class ClienteReadComponent implements AfterViewInit {
+export class ClienteReadComponent implements AfterViewInit, OnInit  {
 
   clientes: Cliente[] = [];
-
+  loading: boolean = true;
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'telefone', 'action'];
   dataSource = new MatTableDataSource<Cliente>(this.clientes);
 
@@ -21,10 +21,13 @@ export class ClienteReadComponent implements AfterViewInit {
 
   constructor(
     private service: ClienteService,
-    private router: Router
+    private router: Router,
+    private cdRef : ChangeDetectorRef
     ) {}
 
-
+  ngOnInit(): void {
+    this.findAll();
+  }
 
   ngAfterViewInit() {
     this.findAll();
@@ -36,6 +39,7 @@ export class ClienteReadComponent implements AfterViewInit {
       this.dataSource = new MatTableDataSource<Cliente>(this.clientes);
       this.dataSource.paginator = this.paginator;
     })
+    this.loading = false;
   }
 
   navigateToCreate():void {

@@ -4,7 +4,7 @@
 </div>
 
 <div class="mat-elevation-z8 container">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table *ngIf="dataSource.filteredData !== []" [dataSource]="dataSource">
   
       <!-- Position Column -->
       <ng-container matColumnDef="cliente">
@@ -55,6 +55,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+    <p *ngIf="lista === []">Vazio</p>
   
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                    showFirstLastButtons 

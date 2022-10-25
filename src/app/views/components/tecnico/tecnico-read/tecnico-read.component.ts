@@ -10,10 +10,10 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
   templateUrl: './tecnico-read.component.html',
   styleUrls: ['./tecnico-read.component.css']
 })
-export class TecnicoReadComponent implements AfterViewInit {
+export class TecnicoReadComponent implements AfterViewInit, OnInit {
 
   tecnicos: Tecnico[] = [];
-
+  loading: boolean = true;
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'telefone', 'action'];
   dataSource = new MatTableDataSource<Tecnico>(this.tecnicos);
 
@@ -23,6 +23,11 @@ export class TecnicoReadComponent implements AfterViewInit {
     private service: TecnicoService,
     private router: Router
     ) {}
+
+    ngOnInit(): void {
+      this.findAll();
+    }
+  
 
   ngAfterViewInit() {
     this.findAll();
@@ -34,7 +39,10 @@ export class TecnicoReadComponent implements AfterViewInit {
       this.dataSource = new MatTableDataSource<Tecnico>(this.tecnicos);
       this.dataSource.paginator = this.paginator;
     })
+
+    this.loading = false;
   }
+
 
   navigateToCreate():void {
     this.router.navigate(['tecnicos/create'])

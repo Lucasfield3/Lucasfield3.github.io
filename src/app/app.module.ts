@@ -38,6 +38,7 @@ import { OsDeleteComponent } from './views/components/ordemServico/os-delete/os-
 import { OsViewComponent } from './views/components/ordemServico/os-view/os-view.component';
 import { OsClosedComponent } from './views/components/os-closed/os-closed.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, NavComponent, HomeComponent, TecnicoReadComponent, TecnicoCreateComponent, TecnicoUpdateComponent, TecnicoDeleteComponent, ClienteReadComponent, ClienteCreateComponent, ClienteUpdateComponent, ClienteDeleteComponent, OsReadComponent, OsCreateComponent, OsUpdateComponent, OsDeleteComponent, OsViewComponent, OsClosedComponent],
@@ -66,7 +67,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDatepickerModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

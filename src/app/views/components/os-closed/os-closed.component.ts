@@ -14,7 +14,8 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
 })
 export class OsClosedComponent implements OnInit, AfterViewInit {
 
-  lista: OS[] = [];
+  lista: OS[] | undefined = [];
+  loading: boolean = true;
   tecnicoName:string = ''
   clienteName:string = ''
 
@@ -27,7 +28,7 @@ export class OsClosedComponent implements OnInit, AfterViewInit {
     private service: OSService,
     private cliente: ClienteService,
     private tecnico: TecnicoService,
-    private router: Router
+    private router: Router,
     ) {}
 
   ngAfterViewInit() {
@@ -38,7 +39,6 @@ export class OsClosedComponent implements OnInit, AfterViewInit {
   }
 
   findAll():void {
-
     this.service.findAll().subscribe((resposta)=> {
       console.log(resposta);
       
@@ -52,14 +52,14 @@ export class OsClosedComponent implements OnInit, AfterViewInit {
       this.findClienteById();
       this.dataSource = new MatTableDataSource<OS>(this.lista);
       this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource.paginator);
+      console.log(this.dataSource.filteredData);
       console.log(this.lista);
-      
+      this.loading = false;
     })
   }
 
   findClienteById():void {
-    this.lista.map((item)=>{
+    this.lista?.map((item)=>{
       this.cliente.findById(item.cliente).subscribe((resposta)=> {
         item.cliente = resposta.nome
       })
@@ -67,7 +67,7 @@ export class OsClosedComponent implements OnInit, AfterViewInit {
   }
 
   findTecnicoById():void {
-    this.lista.map((item)=>{
+    this.lista?.map((item)=>{
       this.tecnico.findById(item.tecnico).subscribe((resposta)=> {
         item.tecnico = resposta.nome
       })

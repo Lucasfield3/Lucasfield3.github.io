@@ -15,6 +15,7 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
 export class OsReadComponent implements OnInit, AfterViewInit {
 
   lista: OS[] = [];
+  loading: boolean = true;
   tecnicoName:string = ''
   clienteName:string = ''
 
@@ -38,16 +39,15 @@ export class OsReadComponent implements OnInit, AfterViewInit {
   }
 
   findAll():void {
-
     this.service.findAll().subscribe((resposta)=> {
       this.lista = resposta.filter((item)=> item.status !== "ENCERRADO");
       this.findTecnicoById();
       this.findClienteById();
       this.dataSource = new MatTableDataSource<OS>(this.lista);
       this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource.paginator);
-      console.log(resposta);
-      
+      console.log(this.dataSource.filteredData);
+      //console.log(resposta);
+      this.loading = false;
     })
   }
 
